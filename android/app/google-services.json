@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "879348636134",
+    "project_id": "myeducation-9c9a9",
+    "storage_bucket": "myeducation-9c9a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879348636134:android:4f3994a060e776490ade27",
+        "android_client_info": {
+          "package_name": "com.hackwave.my_education"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "879348636134-ajq7vttbhqiiuffio4rjun5l5rs4i4dr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hackwave.my_education",
+            "certificate_hash": "7271a0b7dc9b63ee6c2ce6cd83dafef719549890"
+          }
+        },
+        {
+          "client_id": "879348636134-p5rntcq9df1grujdkhbjvoniq5rppoga.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApJns55VL7QBbJ-9NRFlh-NJ_-z-IOSFQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "879348636134-p5rntcq9df1grujdkhbjvoniq5rppoga.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
