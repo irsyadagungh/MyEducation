@@ -37,6 +37,13 @@
             {
               "client_id": "879348636134-p5rntcq9df1grujdkhbjvoniq5rppoga.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "879348636134-b2f5l9n7mistfhqkmjtlb2hla53te52q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.myEducation"
+              }
             }
           ]
         }
