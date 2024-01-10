@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_education/app/routes/app_pages.dart';
@@ -15,7 +14,6 @@ class AuthController extends GetxController {
 
   Future<void> login() async {
     try {
-
       // mencegah kebocoran data login
       await googleSignIn.signOut();
 
@@ -39,7 +37,9 @@ class AuthController extends GetxController {
           idToken: googleAuth.idToken,
         );
 
-        await FirebaseAuth.instance.signInWithCredential(credential).then((value) => userCredential = value);
+        await FirebaseAuth.instance
+            .signInWithCredential(credential)
+            .then((value) => userCredential = value);
 
         CollectionReference users = firestore.collection('users');
 
@@ -57,9 +57,7 @@ class AuthController extends GetxController {
           });
 
           Get.offAllNamed(Routes.HOME);
-          
         }
-
       }
     } catch (e) {
       print(e);

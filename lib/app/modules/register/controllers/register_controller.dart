@@ -1,11 +1,20 @@
 import 'package:get/get.dart';
+import 'package:my_education/app/modules/register/services/firestore_service.dart';
+// import 'package:my_education/firebase_options.dart';
 
 class RegisterController extends GetxController {
   //TODO: Implement RegisterController
 
-  void registerUser() {
-    // Implement your registration logic here
-    print('User registered');
+  final FirestoreService _firestoreService = FirestoreService();
+
+  void registerUser(String username, String Email, String password) async {
+    try {
+      await _firestoreService.addUser(username, password);
+      print('User registered in Firestore');
+    } catch (e) {
+      print('Error registering user: $e');
+      // Handle error as needed
+    }
   }
 
   final count = 0.obs;

@@ -32,6 +32,7 @@ class RegisterView extends GetView<RegisterController> {
             ElevatedButton(
               onPressed: () {
                 // Call a function in the controller to handle registration logic
+                String username = ;
                 controller.registerUser();
               },
               child: const Text('Register'),
