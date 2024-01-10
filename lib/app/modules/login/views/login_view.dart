@@ -12,9 +12,9 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      body: ListView(
         scrollDirection: Axis.vertical,
-        child: Stack(
+        children: [Stack(
           children: [
             //Background
             Container(
@@ -24,8 +24,8 @@ class LoginView extends GetView<LoginController> {
                 width: double.infinity,
                 height: double.infinity,
               ),
-            ),
-        
+          ]),
+
             //Content
             Container(
               padding: EdgeInsets.symmetric(horizontal: 50),
@@ -34,7 +34,7 @@ class LoginView extends GetView<LoginController> {
                   SizedBox(
                     height: 50,
                   ),
-        
+
                   //Logo
                   Container(
                     alignment: AlignmentDirectional.topCenter,
@@ -42,7 +42,7 @@ class LoginView extends GetView<LoginController> {
                       'assets/images/log in.png',
                     ),
                   ),
-        
+
                   //Username
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,11 +63,11 @@ class LoginView extends GetView<LoginController> {
                       )
                     ],
                   ),
-        
+
                   SizedBox(
                     height: 20,
                   ),
-        
+
                   //Password
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,11 +90,11 @@ class LoginView extends GetView<LoginController> {
                       )
                     ],
                   ),
-        
+
                   SizedBox(
                     height: 40,
                   ),
-        
+
                   // Button Login
                   Container(
                     width: double.infinity,
@@ -113,11 +113,11 @@ class LoginView extends GetView<LoginController> {
                       ),
                     ),
                   ),
-        
+
                   SizedBox(
                     height: 40,
                   ),
-        
+
                   // devider
                   Row(
                     children: [
@@ -138,11 +138,11 @@ class LoginView extends GetView<LoginController> {
                       ),
                     ],
                   ),
-        
+
                   SizedBox(
                     height: 40,
                   ),
-        
+
                   // Button Sign Up
                   Container(
                     width: double.infinity,
@@ -162,20 +162,20 @@ class LoginView extends GetView<LoginController> {
                       ),
                     ),
                   ),
-        
+
                   SizedBox(
                     height: 40,
                   ),
-        
+
                   //Sign In With Google
                   ElevatedButton(
                     onPressed: () async {
                       UserCredential userCredential = await signInWithGoogle();
-                      
+
                       // Lakukan sesuatu setelah pengguna berhasil masuk dengan Google
                       print(
                           'User ${userCredential.user?.displayName} berhasil masuk!');
-        
+
                       if (userCredential.user != null) {
                         Get.to(() => HomeView());
                         print("Session User ada");

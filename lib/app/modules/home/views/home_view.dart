@@ -6,6 +6,7 @@ import 'package:my_education/app/modules/login/views/login_view.dart';
 
 import '../controllers/home_controller.dart';
 
+// ignore: must_be_immutable
 class HomeView extends GetView<HomeController> {
   HomeView({Key? key}) : super(key: key);
 
