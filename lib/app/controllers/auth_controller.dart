@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:my_education/app/data/models/user_model.dart';
 import 'package:my_education/app/routes/app_pages.dart';
 
 class AuthController extends GetxController {
@@ -10,9 +11,12 @@ class AuthController extends GetxController {
   GoogleSignIn googleSignIn = GoogleSignIn();
   UserCredential? userCredential;
 
+  UserModel user = UserModel();
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<void> login() async {
+  // Login with Google
+  Future<void> signInWithGoogle() async {
     try {
       // mencegah kebocoran data login
       await googleSignIn.signOut();
@@ -49,18 +53,119 @@ class AuthController extends GetxController {
           Get.offAllNamed(Routes.HOME);
         } else {
           users.doc(userCredential!.user!.uid).set({
+            'uid': userCredential!.user!.uid,
             'name': userCredential!.user!.displayName,
+            'username': getEmailUsername(userCredential!.user!.email!),
+            'phone': "",
             'email': userCredential!.user!.email,
             'photo': userCredential!.user!.photoURL,
-            'uid': userCredential!.user!.uid,
             'role': 'user',
           });
 
           Get.offAllNamed(Routes.HOME);
         }
+        final currUser = await users.doc(userCredential!.user!.uid).get();
+        final currUserData = currUser.data() as Map<String, dynamic>;
+
+        user = UserModel(
+          uid: currUserData['uid'],
+          name: currUserData['name'],
+          username: currUserData['username'],
+          phone: currUserData['phone'],
+          email: currUserData['email'],
+          photo: currUserData['photo'],
+          role: currUserData['role'],
+        );
       }
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<void> register(String username, String email, String password) async {
+    try {
+      userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+
+      CollectionReference users = firestore.collection('users');
+
+      final checkUser = await users.doc(userCredential!.user!.uid).get();
+
+      if (checkUser.exists) {
+        Get.offAllNamed(Routes.LOGIN);
+        Get.snackbar("Email sudah terdaftar", "Silahkan login");
+      } else {
+        users.doc(userCredential!.user!.uid).set({
+          'uid': userCredential!.user!.uid,
+          'name': "",
+          'username': username,
+          'phone': "",
+          'email': email,
+          'photo': "",
+          'role': 'user',
+        });
+        Get.offAllNamed(Routes.LOGIN);
+        Get.snackbar("Berhasil", "Silahkan login");
+        print(
+            "BERHASIL REGISTER DENGAN EMAIL : " + userCredential!.user!.email!);
+      }
+
+      final currUser = await users.doc(userCredential!.user!.uid).get();
+      final currUserData = currUser.data() as Map<String, dynamic>;
+
+      user = UserModel(
+        uid: currUserData['uid'],
+        name: currUserData['name'],
+        username: currUserData['username'],
+        phone: currUserData['phone'],
+        email: currUserData['email'],
+        photo: currUserData['photo'],
+        role: currUserData['role'],
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> login(String email, String password) async {
+    try {
+      userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+
+      CollectionReference users = firestore.collection('users');
+
+      final checkUser = await users.doc(userCredential!.user!.uid).get();
+
+      if (checkUser.exists) {
+        Get.offAllNamed(Routes.HOME);
+        Get.snackbar("Berhasil", "Selamat datang");
+      } else {
+        Get.offAllNamed(Routes.LOGIN);
+        Get.snackbar("Gagal", "Silahkan register");
+      }
+
+      final currUser = await users.doc(userCredential!.user!.uid).get();
+      final currUserData = currUser.data() as Map<String, dynamic>;
+
+      user = UserModel(
+        uid: currUserData['uid'],
+        name: currUserData['name'],
+        username: currUserData['username'],
+        phone: currUserData['phone'],
+        email: currUserData['email'],
+        photo: currUserData['photo'],
+        role: currUserData['role'],
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  String getEmailUsername(String email) {
+    List<String> parts = email.split('@');
+    if (parts.length > 1) {
+      return parts[0]; // Mengembalikan bagian sebelum '@'
+    }
+    return email; // Jika tidak ada '@', kembalikan keseluruhan alamat email
   }
 }

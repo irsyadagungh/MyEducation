@@ -12,6 +12,9 @@ import '../controllers/login_controller.dart';
 class LoginView extends GetView<LoginController> {
   final authC = Get.find<AuthController>();
 
+  final email = TextEditingController();
+  final password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,10 +52,11 @@ class LoginView extends GetView<LoginController> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Username"),
+                      Text("Email"),
                       SizedBox(
                         height: 40,
-                        child: TextField(
+                        child: TextFormField(
+                          controller: email,
                           decoration: InputDecoration(
                               suffixIcon: Icon(Icons.person),
                               isDense: true,
@@ -78,7 +82,8 @@ class LoginView extends GetView<LoginController> {
                       SizedBox(
                         height: 40,
                         child: Center(
-                          child: TextField(
+                          child: TextFormField(
+                            controller: password,
                             decoration: InputDecoration(
                                 suffixIcon: Icon(Icons.remove_red_eye),
                                 isDense: true,
@@ -102,7 +107,9 @@ class LoginView extends GetView<LoginController> {
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        authC.login(email.text, password.text);
+                      },
                       child: Text("Login"),
                       style: ButtonStyle(
                         backgroundColor:
@@ -174,7 +181,7 @@ class LoginView extends GetView<LoginController> {
                   //Sign In With Google
                   ElevatedButton(
                     onPressed: () async {
-                      await authC.login();
+                      await authC.signInWithGoogle();
                       Get.to(() => HomeView());
                     },
                     child: Text("Sign In With Google"),
