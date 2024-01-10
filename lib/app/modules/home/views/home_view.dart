@@ -8,8 +8,6 @@ import '../controllers/home_controller.dart';
 
 // ignore: must_be_immutable
 class HomeView extends GetView<HomeController> {
-  HomeView({Key? key}) : super(key: key);
-
   final auth = Get.find<AuthController>();
 
   @override
@@ -42,11 +40,15 @@ class HomeView extends GetView<HomeController> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: ListTile(
-                leading:
-                    ClipOval(child: Image.network(auth.currentUser!.photoUrl!)),
-                title: Text(auth.currentUser!.displayName!),
+                leading: ClipOval(
+                    child: auth.currentUser?.photoUrl != null
+                        ? Image.network(auth.currentUser!.photoUrl!)
+                        : Icon(Icons.person)),
+                title: auth.user.username != null
+                    ? Text("${auth.user.username}")
+                    : Text("${auth.user.name}"),
                 subtitle: Text(
-                  auth.currentUser!.email,
+                  "${auth.user.email}",
                   style: TextStyle(color: Color.fromARGB(255, 0, 111, 207)),
                 ),
                 trailing: IconButton(
