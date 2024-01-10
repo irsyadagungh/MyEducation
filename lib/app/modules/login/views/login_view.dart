@@ -12,9 +12,9 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
+      body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        children: [Stack(
+        child: Stack(
           children: [
             //Background
             Container(
@@ -24,7 +24,7 @@ class LoginView extends GetView<LoginController> {
                 width: double.infinity,
                 height: double.infinity,
               ),
-          ]),
+            ),
 
             //Content
             Container(
