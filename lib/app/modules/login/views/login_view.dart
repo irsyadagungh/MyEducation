@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_education/app/controllers/auth_controller.dart';
 import 'package:my_education/app/modules/home/views/home_view.dart';
+import 'package:my_education/app/modules/register/views/register_view.dart';
 
 import '../../../../main.dart';
 import '../controllers/login_controller.dart';
@@ -149,7 +150,9 @@ class LoginView extends GetView<LoginController> {
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(() => RegisterView());
+                      },
                       child: Text("Sign Up"),
                       style: ButtonStyle(
                         elevation: MaterialStateProperty.all(0),
