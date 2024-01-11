@@ -14,10 +14,6 @@ class RegisterView extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('RegisterView'),
-        centerTitle: true,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -40,10 +36,18 @@ class RegisterView extends GetView<RegisterController> {
             ElevatedButton(
               onPressed: () {
                 // Call a function in the controller to handle registration logic
-                authC.register(username.text, email.text, password.text);
+                authC.register(
+                    username.text, email.text, password.text, "user");
               },
               child: const Text('Register'),
             ),
+
+            ElevatedButton(
+                onPressed: () {
+                  authC.register(
+                      username.text, email.text, password.text, "school");
+                },
+                child: Text("Sign In as School"))
           ],
         ),
       ),

@@ -83,7 +83,8 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> register(String username, String email, String password) async {
+  Future<void> register(
+      String username, String email, String password, String role) async {
     try {
       userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -103,7 +104,7 @@ class AuthController extends GetxController {
           'phone': "",
           'email': email,
           'photo': "",
-          'role': 'user',
+          'role': role,
         });
         Get.offAllNamed(Routes.LOGIN);
         Get.snackbar("Berhasil", "Silahkan login");
@@ -135,16 +136,6 @@ class AuthController extends GetxController {
 
       CollectionReference users = firestore.collection('users');
 
-      final checkUser = await users.doc(userCredential!.user!.uid).get();
-
-      if (checkUser.exists) {
-        Get.offAllNamed(Routes.HOME);
-        Get.snackbar("Berhasil", "Selamat datang");
-      } else {
-        Get.offAllNamed(Routes.LOGIN);
-        Get.snackbar("Gagal", "Silahkan register");
-      }
-
       final currUser = await users.doc(userCredential!.user!.uid).get();
       final currUserData = currUser.data() as Map<String, dynamic>;
 
@@ -157,6 +148,14 @@ class AuthController extends GetxController {
         photo: currUserData['photo'],
         role: currUserData['role'],
       );
+
+      if (user.role == "user") {
+        Get.offAllNamed(Routes.HOME);
+        Get.snackbar("Login Sebagai User Berhasil", "Selamat Datang");
+      } else if (user.role == "school") {
+        Get.offAllNamed(Routes.HOME_SCHOOL);
+        Get.snackbar("Login Sebagai Admin Berhasil", "Selamat Datang");
+      }
     } catch (e) {
       print(e);
     }

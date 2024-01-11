@@ -3,15 +3,20 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:my_education/app/controllers/auth_controller.dart';
+import 'package:my_education/app/controllers/content_controller.dart';
+import 'package:my_education/app/data/models/content_donation_model.dart';
+import 'package:my_education/app/modules/detailDonation/views/detail_donation_view.dart';
 
 import '../controllers/home_controller.dart';
 
 // ignore: must_be_immutable
 class HomeView extends GetView<HomeController> {
   final auth = Get.find<AuthController>();
+  final donate = Get.find<ContentController>();
 
   @override
   Widget build(BuildContext context) {
+    donate.display();
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -90,42 +95,51 @@ class HomeView extends GetView<HomeController> {
                           ))
                     ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
                   Container(
+                    color: Colors.blue,
+                    width: double.infinity,
                     height: 300,
-                    color: Colors.grey,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            height: 100,
-                            color: Colors.blue,
-                            margin: EdgeInsets.only(bottom: 10),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 100,
-                                  height: 100,
-                                  color: Colors.grey,
+                    child: GetBuilder<ContentController>(
+                      init: donate,
+                      builder: (controller) {
+                        // Check if the data is still loading
+
+                        // Display the data using ListView.builder
+                        return Container(
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: controller.contentList.length,
+                            itemBuilder: (context, index) {
+                              print(controller.contentList.length);
+                              ContentDonation item =
+                                  controller.contentList[index];
+
+                              // Your UI code for displaying each item
+                              return Container(
+                                color: Colors.amber,
+                                width: 300,
+                                height: 200,
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.to(() => DetailDonationView(
+                                          item: item,
+                                        ));
+                                  },
+                                  child: Card(
+                                    child: ListTile(
+                                      title: Text("${item.title}"),
+                                      subtitle: Text("${item.description}"),
+                                      // Add other UI components as needed
+                                    ),
+                                  ),
                                 ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Nama Sekolah"),
-                                    Text("Alamat Sekolah"),
-                                    Text("Jumlah Donasi"),
-                                  ],
-                                )
-                              ],
-                            ),
-                          );
-                        }),
-                  )
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             )
