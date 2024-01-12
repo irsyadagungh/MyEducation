@@ -63,7 +63,7 @@ class RegisterView extends GetView<RegisterController> {
                 onPressed: () {
                   // Call a function in the controller to handle registration logic
                   authC.register(name.text, username.text, phone.text,
-                      email.text, password.text);
+                      email.text, password.text, 'user');
                 },
                 child: const Text('Register'),
               ),

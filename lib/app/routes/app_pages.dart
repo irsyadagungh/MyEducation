@@ -38,6 +38,11 @@ class AppPages {
       binding: RegisterBinding(),
     ),
     GetPage(
+      name: _Paths.PAYMENT,
+      page: () => PaymentView(),
+      binding: PaymentBinding(),
+    ),
+    GetPage(
       name: _Paths.DETAIL_DONATION,
       page: () {
         final item = Get.arguments as ContentDonation;

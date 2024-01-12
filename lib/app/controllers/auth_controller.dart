@@ -83,7 +83,7 @@ class AuthController extends GetxController {
   }
 
   Future<void> register(String name, String username, String phone,
-      String email, String password) async {
+      String email, String password, String role) async {
     try {
       userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
