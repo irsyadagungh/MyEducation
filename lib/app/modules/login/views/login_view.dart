@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -6,7 +6,7 @@ import 'package:my_education/app/controllers/auth_controller.dart';
 import 'package:my_education/app/modules/home/views/home_view.dart';
 import 'package:my_education/app/modules/register/views/register_view.dart';
 
-import '../../../../main.dart';
+// import '../../../../main.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {

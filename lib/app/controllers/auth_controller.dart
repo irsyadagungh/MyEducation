@@ -82,7 +82,8 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> register(String username, String email, String password) async {
+  Future<void> register(String name, String username, String phone,
+      String email, String password) async {
     try {
       userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -97,9 +98,9 @@ class AuthController extends GetxController {
       } else {
         users.doc(userCredential!.user!.uid).set({
           'uid': userCredential!.user!.uid,
-          'name': "",
+          'name': name,
           'username': username,
-          'phone': "",
+          'phone': phone,
           'email': email,
           'photo': "",
           'role': 'user',
