@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:my_education/app/controllers/auth_controller.dart';
+import 'package:my_education/app/controllers/content_controller.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final authController = Get.put(AuthController(), permanent: true);
+  final content = Get.put(ContentController(), permanent: true);
 
   @override
   Widget build(BuildContext context) {

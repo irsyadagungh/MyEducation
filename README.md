@@ -1,16 +1,7 @@
-# my_education
+Hackwave adalah sebuah komunitas yang lahir dari semangat bersama sekelompok individu yang berkomitmen untuk mendukung peningkatan fasilitas pendidikan di Indonesia. Misi utama Hackwave adalah membantu memperbaiki infrastruktur pendidikan di berbagai wilayah, mengakui bahwa fasilitas yang baik adalah fondasi utama bagi pembelajaran yang efektif.
 
-A new Flutter project.
+Selain fokus pada pengembangan fisik fasilitas pendidikan, Hackwave juga mencurahkan perhatian pada peningkatan kualitas pendidikan secara menyeluruh. Salah satu pendekatan yang diambil adalah penyediaan kumpulan soal-soal HOTS (Higher Order Thinking Skills) yang dapat meningkatkan kemampuan berpikir kritis dan kreatif siswa. Dengan memberikan akses ke soal-soal HOTS, Hackwave berharap dapat memberikan kontribusi positif terhadap peningkatan standar pendidikan di Indonesia.
 
-## Getting Started
+Pendiri dan anggota Hackwave adalah individu yang berkomitmen tinggi terhadap perbaikan sistem pendidikan. Mereka membawa berbagai keterampilan dan keahlian, mulai dari teknologi informasi hingga pendidikan, dengan satu tujuan bersama: menciptakan lingkungan pendidikan yang lebih baik untuk generasi mendatang.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Dengan semangat kolaborasi dan keinginan untuk melihat perubahan positif, Hackwave terus bekerja keras untuk mencapai visi mereka. Melalui upaya ini, mereka berharap dapat memberikan dampak yang signifikan pada perkembangan dan peningkatan pendidikan di seluruh Indonesia.
