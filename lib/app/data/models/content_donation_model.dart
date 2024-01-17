@@ -30,14 +30,17 @@ class ContentDonation {
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final json = snapshot.data()!;
     return ContentDonation(
-      idContent: json['idContent'] ??
-          '', // Provide a default value or handle accordingly
-      title: json['title'] ?? '',
-      description: json['description'] ?? '',
-      location: json['location'] ?? '',
-      deadline: json['deadline'] ?? '',
-      donationTarget: json['donation_target'] ?? '',
-      status: json['status'] ?? '',
+      category: json['category'],
+      deadline: json['deadline'],
+      description: json['description'],
+      donationTarget: json['donation_target'],
+      idContent: json['idContent'],
+      idUser: json['idUser'],
+      location: json['location'],
+      photo: json['photo'],
+      status: json['status'],
+      title: json['title'],
+      viewers: json['viewers'],
     );
   }
 

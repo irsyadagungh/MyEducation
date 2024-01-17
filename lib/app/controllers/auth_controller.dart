@@ -160,6 +160,17 @@ class AuthController extends GetxController {
     }
   }
 
+  Future<void> logout() async {
+    try {
+      await googleSignIn.signOut();
+      await FirebaseAuth.instance.signOut();
+      Get.offAllNamed(Routes.LOGIN);
+      Get.snackbar("Berhasil", "Berhasil Logout");
+    } catch (e) {
+      print(e);
+    }
+  }
+
   String getEmailUsername(String email) {
     List<String> parts = email.split('@');
     if (parts.length > 1) {

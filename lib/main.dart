@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
 
   final authController = Get.put(AuthController(), permanent: true);
   final content = Get.put(ContentController(), permanent: true);
-  final payment = Get.put(PaymentController(), permanent: true);
+  final payment = Get.put(PaymentController(), permanent: true);  
 
   @override
   Widget build(BuildContext context) {
