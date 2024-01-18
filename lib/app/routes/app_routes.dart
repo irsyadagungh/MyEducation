@@ -10,6 +10,7 @@ abstract class Routes {
   static const HOME_SCHOOL = _Paths.HOME_SCHOOL;
   static const VALIDATION = _Paths.VALIDATION;
   static const PAYMENT_SUCCESSFUK = _Paths.PAYMENT_SUCCESSFUK;
+  static const PAYMENT_SUCCESSFUL = _Paths.PAYMENT_SUCCESSFUL;
 }
 
 abstract class _Paths {
@@ -22,4 +23,5 @@ abstract class _Paths {
   static const PAYMENT = '/payment';
   static const VALIDATION = '/validation';
   static const PAYMENT_SUCCESSFUK = '/payment-successfuk';
+  static const PAYMENT_SUCCESSFUL = '/payment-successful';
 }

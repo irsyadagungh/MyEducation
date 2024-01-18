@@ -11,6 +11,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/payment/bindings/payment_binding.dart';
 import '../modules/payment/views/payment_view.dart';
+import '../modules/paymentSuccessful/bindings/payment_successful_binding.dart';
+import '../modules/paymentSuccessful/views/payment_successful_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/validation/bindings/validation_binding.dart';
@@ -67,6 +69,17 @@ class AppPages {
         message: '',
       ),
       binding: ValidationBinding(),
+    ),
+    GetPage(
+      name: _Paths.PAYMENT_SUCCESSFUL,
+      page: () => PaymentSuccessfulView(
+        name: '',
+        nominalPayment: '',
+        paymentMethod: '',
+        message: '',
+        date: '',
+      ),
+      binding: PaymentSuccessfulBinding(),
     ),
   ];
 }

@@ -1,12 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/validation_controller.dart';
+import 'package:my_education/app/controllers/payment_controller.dart';
+
+import '../../paymentSuccessful/views/payment_successful_view.dart';
 
 class ValidationView extends StatelessWidget {
-  final ValidationController controller = Get.put(ValidationController());
+  final String name;
+  final String nominalPayment;
+  final String paymentMethod;
+  final String paymentMethodImage;
+  final String message;
+
+  ValidationView({
+    required this.name,
+    required this.nominalPayment,
+    required this.paymentMethod,
+    required this.paymentMethodImage,
+    required this.message,
+  });
+
+  // Get reference to PaymentController
+  final PaymentController paymentController = Get.find<PaymentController>();
 
   @override
   Widget build(BuildContext context) {
+    // Create a new variable date with the current date and time
+    DateTime now = DateTime.now();
+    String formattedDateTime =
+        "${now.day} ${_getMonth(now.month)} ${now.year} ${_formatTime(now)}";
+    String date = formattedDateTime;
+
     return Scaffold(
       body: Center(
         child: Container(
@@ -30,11 +53,11 @@ class ValidationView extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                   SizedBox(width: 10),
-                  Obx(() => Text(
-                        controller.nameController.text,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.left,
-                      )),
+                  Text(
+                    name,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
                 ],
               ),
               SizedBox(height: 10),
@@ -45,11 +68,11 @@ class ValidationView extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                   SizedBox(width: 10),
-                  Obx(() => Text(
-                        controller.nominalPaymentController.text,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.left,
-                      )),
+                  Text(
+                    nominalPayment,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
                 ],
               ),
               SizedBox(height: 10),
@@ -60,11 +83,11 @@ class ValidationView extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                   SizedBox(width: 10),
-                  Obx(() => Text(
-                        controller.paymentMethodController.text,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.left,
-                      )),
+                  Text(
+                    paymentMethod,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
                 ],
               ),
               SizedBox(height: 10),
@@ -75,11 +98,11 @@ class ValidationView extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                   SizedBox(width: 10),
-                  Obx(() => Text(
-                        controller.messageController.text,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.left,
-                      )),
+                  Text(
+                    message,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
                 ],
               ),
               SizedBox(height: 20),
@@ -112,25 +135,32 @@ class ValidationView extends StatelessWidget {
                       primary: Colors.black,
                       minimumSize: Size(150, 50),
                       side: BorderSide(
-                          color: Colors.red), // Add this line for red border
+                        color: Colors.red,
+                      ),
                     ),
                   ),
                   Spacer(),
                   ElevatedButton(
                     onPressed: () {
-                      // Handle "Lanjutkan" button press
-                      if (controller.isValid.isTrue) {
-                        controller.storeData();
-                        Get.back();
-                      } else {
-                        Get.snackbar(
-                          'Validation Error',
-                          'Please fill in all fields.',
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: Colors.red,
-                          colorText: Colors.white,
-                        );
-                      }
+                      // Pass data to PaymentController before storing
+                      paymentController.name.value = name;
+                      paymentController.nominal_payment.value = nominalPayment;
+                      paymentController.payment_method.value = paymentMethod;
+                      paymentController.payment_method_image.value =
+                          paymentMethodImage;
+                      paymentController.message.value = message;
+
+                      // Store data including the date in PaymentController
+                      paymentController.storeData(date);
+
+                      // Navigate to PaymentSuccessfulView and pass data as arguments
+                      Get.to(() => PaymentSuccessfulView(
+                            name: name,
+                            nominalPayment: nominalPayment,
+                            paymentMethod: paymentMethod,
+                            message: message,
+                            date: date,
+                          ));
                     },
                     child: Text('Lanjutkan'),
                     style: ElevatedButton.styleFrom(
@@ -146,5 +176,29 @@ class ValidationView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _getMonth(int month) {
+    const List<String> months = [
+      'Januari',
+      'Februari',
+      'Maret',
+      'April',
+      'Mei',
+      'Juni',
+      'Juli',
+      'Agustus',
+      'September',
+      'Oktober',
+      'November',
+      'Desember'
+    ];
+
+    return months[month - 1];
+  }
+
+  String _formatTime(DateTime dateTime) {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    return "${twoDigits(dateTime.hour)}:${twoDigits(dateTime.minute)}:${twoDigits(dateTime.second)} WIB";
   }
 }

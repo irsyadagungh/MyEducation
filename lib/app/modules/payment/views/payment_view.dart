@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_education/app/controllers/payment_controller.dart';
+import '../../Validation/views/validation_view.dart';
 
 class PaymentView extends GetView<PaymentController> {
   final payment = Get.find<PaymentController>();

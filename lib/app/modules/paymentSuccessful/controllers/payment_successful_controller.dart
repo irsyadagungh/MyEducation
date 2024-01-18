@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class ValidationController extends GetxController {
-  //TODO: Implement ValidationController
+class PaymentSuccessfulController extends GetxController {
+  //TODO: Implement PaymentSuccessfulController
 
   final count = 0.obs;
   @override
