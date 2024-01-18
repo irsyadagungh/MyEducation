@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_education/app/modules/validation/views/validation_view.dart';
 import '../controllers/payment_controller.dart';
 
 class PaymentView extends GetView<PaymentController> {
@@ -90,14 +91,42 @@ class PaymentView extends GetView<PaymentController> {
                   controller: message,
                   decoration: InputDecoration(labelText: 'Pesan'),
                 ),
+                // ElevatedButton(
+                //   onPressed: () {
+                //     controller.name.value = name.text;
+                //     controller.payment_method.value =
+                //         controller.payment_method.value;
+                //     controller.nominal_payment.value = nominal_payment.text;
+                //     controller.message.value = message.text;
+                //     controller.processPayment();
+                //   },
+                //   child: const Text('Make Payment'),
+                // ),
                 ElevatedButton(
                   onPressed: () {
-                    controller.name.value = name.text;
-                    controller.payment_method.value =
-                        controller.payment_method.value;
-                    controller.nominal_payment.value = nominal_payment.text;
-                    controller.message.value = message.text;
-                    controller.processPayment();
+                    // Extract the entered data
+                    String enteredName = name.text;
+                    String enteredNominalPayment = nominal_payment.text;
+                    String enteredMessage = message.text;
+
+                    // Check if all required fields are filled
+                    if (enteredName.isNotEmpty &&
+                        enteredNominalPayment.isNotEmpty &&
+                        controller.payment_method.value.isNotEmpty) {
+                      // Navigate to the validation view, passing entered data
+                      Get.to(() => ValidationView(
+                            name: enteredName,
+                            nominalPayment: enteredNominalPayment,
+                            paymentMethod: controller.payment_method.value,
+                            paymentMethodImage:
+                                controller.payment_method_image.value,
+                            message: enteredMessage,
+                          ));
+                    } else {
+                      // Show an error message or prompt the user to fill in all fields
+                      Get.snackbar(
+                          'Error', 'Please fill in all required fields');
+                    }
                   },
                   child: const Text('Make Payment'),
                 ),

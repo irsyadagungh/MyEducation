@@ -8,6 +8,8 @@ abstract class Routes {
   static const REGISTER = _Paths.REGISTER;
   static const DETAIL_DONATION = _Paths.DETAIL_DONATION;
   static const HOME_SCHOOL = _Paths.HOME_SCHOOL;
+  static const VALIDATION = _Paths.VALIDATION;
+  static const PAYMENT_SUCCESSFUK = _Paths.PAYMENT_SUCCESSFUK;
 }
 
 abstract class _Paths {
@@ -18,4 +20,6 @@ abstract class _Paths {
   static const DETAIL_DONATION = '/detail-donation';
   static const HOME_SCHOOL = '/home-school';
   static const PAYMENT = '/payment';
+  static const VALIDATION = '/validation';
+  static const PAYMENT_SUCCESSFUK = '/payment-successfuk';
 }

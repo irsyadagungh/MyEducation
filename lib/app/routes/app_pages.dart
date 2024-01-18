@@ -13,6 +13,8 @@ import '../modules/payment/bindings/payment_binding.dart';
 import '../modules/payment/views/payment_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/validation/bindings/validation_binding.dart';
+import '../modules/validation/views/validation_view.dart';
 
 part 'app_routes.dart';
 
@@ -54,6 +56,17 @@ class AppPages {
       name: _Paths.HOME_SCHOOL,
       page: () => HomeSchoolView(),
       binding: HomeSchoolBinding(),
+    ),
+    GetPage(
+      name: _Paths.VALIDATION,
+      page: () => ValidationView(
+        name: '',
+        nominalPayment: '',
+        paymentMethod: '',
+        paymentMethodImage: '',
+        message: '',
+      ),
+      binding: ValidationBinding(),
     ),
   ];
 }
