@@ -19,6 +19,8 @@ class DetailDonationView extends GetView<DetailDonationController> {
       body: Column(
         children: [
           Text("${item.title}"),
+          Text("${item.description}"),
+          Text("Rp. ${item.donationTarget}"),
           Container(
             width: double.infinity,
             height: 50,

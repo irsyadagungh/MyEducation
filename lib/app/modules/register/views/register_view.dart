@@ -27,8 +27,7 @@ class RegisterView extends GetView<RegisterController> {
         ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 50),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
             children: [
               //Logo
               Container(
@@ -67,6 +66,13 @@ class RegisterView extends GetView<RegisterController> {
                 },
                 child: const Text('Register'),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  authC.register(name.text, username.text, phone.text,
+                      email.text, password.text, 'school');
+                },
+                child: const Text('Register as School'),
+              )
             ],
           ),
         ),
